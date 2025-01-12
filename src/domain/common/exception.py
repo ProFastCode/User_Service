@@ -7,11 +7,11 @@ class AppError(Exception):
     status: ClassVar[int] = 500
 
     @property
-    def detail(self) -> str:
+    def message(self) -> str:
         return "An app error occurred"
 
 
 class DomainError(AppError):
     @property
-    def detail(self) -> str:
+    def message(self) -> str:
         return "A domain error occurred"

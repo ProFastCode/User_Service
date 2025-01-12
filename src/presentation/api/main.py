@@ -1,5 +1,5 @@
 import logging
-from litestar import Litestar, Request
+from litestar import Litestar, Request, Response
 from litestar.enums import ScopeType
 from litestar.openapi.config import OpenAPIConfig
 from litestar.openapi.plugins import SwaggerRenderPlugin
@@ -11,12 +11,21 @@ from litestar.types import ASGIApp, Scope, Receive, Send
 from infrastructure.ioc import AppProvider
 from infrastructure.mediator import Mediator
 from infrastructure.mediator.main import setup_mediator
+from domain.common.exception import AppError
 
 from .user import route as user_route
 
 ioc = make_async_container(AppProvider())
 
 logger = logging.getLogger(__name__)
+
+
+def app_error_handler(request: Request, exc: AppError) -> Response:
+    logging.error(exc.message)
+    return Response(
+        content={"message": exc.message},
+        status_code=400,
+    )
 
 
 def add_request_container_middleware(app: ASGIApp) -> ASGIApp:
@@ -48,6 +57,9 @@ def get_litestar_app() -> Litestar:
             render_plugins=[SwaggerRenderPlugin()],
             path="/docs",
         ),
+        exception_handlers={
+            AppError: app_error_handler,
+        },
     )
     litestar_integration.setup_dishka(ioc, litestar_app)
     return litestar_app
