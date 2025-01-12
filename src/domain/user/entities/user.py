@@ -15,7 +15,6 @@ class User(AggregateRoot, UUIDEntity, CreatedAtEntity):
         id: Уникальный идентификатор пользователя.
         username: Имя пользователя (Value Object).
         password: Пароль пользователя (Value Object).
-        email: Email пользователя.
         created_at: Дата регистрации пользователя.
     """
 
