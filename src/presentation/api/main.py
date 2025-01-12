@@ -6,18 +6,18 @@ from litestar.openapi.plugins import SwaggerRenderPlugin
 
 from dishka import make_async_container
 from dishka.integrations import litestar as litestar_integration
-
 from litestar.types import ASGIApp, Scope, Receive, Send
+
 from infrastructure.ioc import AppProvider
 from infrastructure.mediator import Mediator
 from infrastructure.mediator.main import setup_mediator
 from domain.common.exception import AppError
 
-from .user import route as user_route
-
-ioc = make_async_container(AppProvider())
+from .user import user_router
 
 logger = logging.getLogger(__name__)
+
+ioc = make_async_container(AppProvider())
 
 
 def app_error_handler(request: Request, exc: AppError) -> Response:
@@ -48,7 +48,7 @@ def add_request_container_middleware(app: ASGIApp) -> ASGIApp:
 
 def get_litestar_app() -> Litestar:
     litestar_app = Litestar(
-        [user_route.read, user_route.create],
+        [user_router],
         middleware=[add_request_container_middleware],
         openapi_config=OpenAPIConfig(
             title="User Service",
