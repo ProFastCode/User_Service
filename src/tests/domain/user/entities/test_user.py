@@ -1,4 +1,4 @@
-from domain.user.entities.user import User
+from src.domain.user.entities.user import User
 
 
 def test_create():

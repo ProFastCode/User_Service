@@ -1,8 +1,8 @@
 from typing import Self
 from dataclasses import dataclass
 
-from domain.common import Entity
-from domain.auth.value_objects.token import Token
+from src.domain.common import Entity
+from src.domain.auth.value_objects.token import Token
 
 
 @dataclass

@@ -1,14 +1,14 @@
 from dishka import Provider, Scope, provide
 
-from infrastructure.mediator import Mediator
-from infrastructure.mediator.main import init_mediator
-from infrastructure.uow import UnitOfWork
-from infrastructure.memory.uow import MemoryUoW
-from application.user.interfaces import UserRepo, UserReader
-from infrastructure.memory import MemorySession
-from infrastructure.memory.repositories import UserRepoMemory, UserReaderMemory
-from application.user.commands import CreateUserHandler
-from application.user.queries import GetUserByOidHandler
+from src.infrastructure.mediator import Mediator
+from src.infrastructure.mediator.main import init_mediator
+from src.infrastructure.uow import UnitOfWork
+from src.infrastructure.memory.uow import MemoryUoW
+from src.application.user.interfaces import UserRepo, UserReader
+from src.infrastructure.memory import MemorySession
+from src.infrastructure.memory.repositories import UserRepoMemory, UserReaderMemory
+from src.application.user.commands import CreateUserHandler
+from src.application.user.queries import GetUserByOidHandler
 
 
 class AppProvider(Provider):

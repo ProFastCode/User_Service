@@ -1,8 +1,8 @@
 from dishka.async_container import AsyncContainer
 
 from .mediator import Mediator
-from application.user.commands import CreateUser, CreateUserHandler
-from application.user.queries import GetUserByOid, GetUserByOidHandler
+from src.application.user.commands import CreateUser, CreateUserHandler
+from src.application.user.queries import GetUserByOid, GetUserByOidHandler
 
 
 def init_mediator() -> Mediator:

@@ -1,6 +1,6 @@
 from collections.abc import Sequence
 
-from application.common.interfaces.uow import UnitOfWork
+from src.application.common.interfaces.uow import UnitOfWork
 
 
 def build_uow() -> UnitOfWork:

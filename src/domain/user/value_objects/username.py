@@ -1,8 +1,8 @@
 import re
 from dataclasses import dataclass
 
-from domain.common import ValueObject
-from domain.user.exceptions.username import (
+from src.domain.common import ValueObject
+from src.domain.user.exceptions.username import (
     UsernameTooShortError,
     UsernameTooLongError,
     WrongUsernameFormatError,

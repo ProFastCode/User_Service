@@ -2,9 +2,9 @@ from collections import defaultdict
 from collections.abc import Iterable
 from dataclasses import dataclass, field
 
-from application.common.command import CR, CT, Command, CommandHandler
-from application.common.event import ER, ET, Event, EventHandler
-from application.common.query import QR, QT, Query, QueryHandler
+from src.application.common.command import CR, CT, Command, CommandHandler
+from src.application.common.event import ER, ET, Event, EventHandler
+from src.application.common.query import QR, QT, Query, QueryHandler
 
 
 @dataclass(eq=False)

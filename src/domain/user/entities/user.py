@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Self
 
-from domain.common import AggregateRoot, UUIDEntity, CreatedAtEntity
-from domain.user.value_objects.username import Username
-from domain.user.value_objects.password import Password
+from src.domain.common import AggregateRoot, UUIDEntity, CreatedAtEntity
+from src.domain.user.value_objects.username import Username
+from src.domain.user.value_objects.password import Password
 
 
 @dataclass

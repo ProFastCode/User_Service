@@ -3,11 +3,11 @@ from collections.abc import AsyncIterator
 import pytest
 from dishka.async_container import AsyncContainer, make_async_container
 
-from application.user.interfaces import UserReader, UserRepo
-from infrastructure.mediator import Mediator
-from infrastructure.mediator.main import setup_mediator
-from infrastructure.memory.repositories import UserReaderMemory, UserRepoMemory
-from tests.ioc import TestAppProvider
+from src.application.user.interfaces import UserReader, UserRepo
+from src.infrastructure.mediator import Mediator
+from src.infrastructure.mediator.main import setup_mediator
+from src.infrastructure.memory.repositories import UserReaderMemory, UserRepoMemory
+from src.tests.ioc import TestAppProvider
 
 
 @pytest.fixture(scope="session")

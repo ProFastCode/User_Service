@@ -1,6 +1,6 @@
 import pytest
 
-from domain.user.exceptions.password import (
+from src.domain.user.exceptions.password import (
     PasswordRequiresDigitError,
     PasswordRequiresLowercaseError,
     PasswordRequiresSpecialCharError,
@@ -8,7 +8,7 @@ from domain.user.exceptions.password import (
     PasswordTooLongError,
     PasswordTooShortError,
 )
-from domain.user.value_objects.password import Password
+from src.domain.user.value_objects.password import Password
 
 
 def test_valid_password():

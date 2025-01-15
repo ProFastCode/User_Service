@@ -1,8 +1,8 @@
 import re
 from dataclasses import dataclass
 
-from domain.common import ValueObject
-from domain.user.exceptions.password import (
+from src.domain.common import ValueObject
+from src.domain.user.exceptions.password import (
     PasswordTooShortError,
     PasswordTooLongError,
     PasswordRequiresDigitError,

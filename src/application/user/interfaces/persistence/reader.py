@@ -1,7 +1,7 @@
 from typing import Protocol
 from uuid import UUID
 
-from application.user import dto
+from src.application.user import dto
 
 
 class UserReader(Protocol):

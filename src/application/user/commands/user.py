@@ -2,12 +2,11 @@ import logging
 from dataclasses import dataclass
 from uuid import UUID
 
-from infrastructure.mediator import Mediator
-
-from application.common.command import Command, CommandHandler
-from application.common.interfaces.uow import UnitOfWork
-from application.user.interfaces import UserRepo
-from domain.user.entities.user import User
+from src.infrastructure.mediator import Mediator
+from src.application.common.command import Command, CommandHandler
+from src.application.common.interfaces.uow import UnitOfWork
+from src.application.user.interfaces import UserRepo
+from src.domain.user.entities.user import User
 
 logger = logging.getLogger(__name__)
 

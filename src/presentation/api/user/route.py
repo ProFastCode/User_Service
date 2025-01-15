@@ -5,10 +5,10 @@ from litestar.params import Body
 from litestar import post, get, Router
 from dishka.integrations.litestar import inject, FromDishka
 
-from application.user.commands.user import CreateUser
-from application.user.queries.user import GetUserByOid
-from application.user.dto.user import UserDTO, CreateUserDTO
-from infrastructure.mediator.mediator import Mediator
+from src.application.user.commands.user import CreateUser
+from src.application.user.queries.user import GetUserByOid
+from src.application.user.dto.user import UserDTO, CreateUserDTO
+from src.infrastructure.mediator.mediator import Mediator
 
 
 @get()

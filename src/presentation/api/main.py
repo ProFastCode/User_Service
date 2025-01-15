@@ -8,10 +8,10 @@ from dishka import make_async_container
 from dishka.integrations import litestar as litestar_integration
 from litestar.types import ASGIApp, Scope, Receive, Send
 
-from infrastructure.ioc import AppProvider
-from infrastructure.mediator import Mediator
-from infrastructure.mediator.main import setup_mediator
-from domain.common.exception import AppError
+from src.infrastructure.ioc import AppProvider
+from src.infrastructure.mediator import Mediator
+from src.infrastructure.mediator.main import setup_mediator
+from src.domain.common.exception import AppError
 
 from .user import user_router
 

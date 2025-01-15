@@ -2,9 +2,9 @@ import logging
 from dataclasses import dataclass
 from uuid import UUID
 
-from application.common.query import Query, QueryHandler
-from application.user.interfaces import UserReader
-from application.user import dto
+from src.application.common.query import Query, QueryHandler
+from src.application.user.interfaces import UserReader
+from src.application.user import dto
 
 logger = logging.getLogger(__name__)
 

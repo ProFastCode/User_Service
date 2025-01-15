@@ -1,4 +1,4 @@
-from domain.common import AppError
+from src.domain.common import AppError
 
 
 class ApplicationError(AppError):

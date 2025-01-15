@@ -1,4 +1,4 @@
-from application.common.interfaces.uow import UnitOfWork
+from src.application.common.interfaces.uow import UnitOfWork
 
 
 class MemoryUoW(UnitOfWork):

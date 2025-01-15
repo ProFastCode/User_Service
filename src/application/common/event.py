@@ -2,7 +2,7 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Protocol, TypeVar
 
-from domain.common import Event
+from src.domain.common import Event
 
 ER = TypeVar("ER", covariant=True)
 ET = TypeVar("ET", contravariant=True, bound=Event)

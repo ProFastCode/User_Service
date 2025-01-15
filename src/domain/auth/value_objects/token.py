@@ -4,8 +4,8 @@ from time import time
 
 import jwt
 
-from domain.common import ValueObject
-from domain.auth.exceptions.token import TokenInvalidError, TokenExpiredError
+from src.domain.common import ValueObject
+from src.domain.auth.exceptions.token import TokenInvalidError, TokenExpiredError
 
 JWT_SECRET = "your_secret_key"  # Замените на секретный ключ из конфигурации
 

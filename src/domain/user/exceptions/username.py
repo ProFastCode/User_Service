@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from domain.common import DomainError
+from src.domain.common import DomainError
 
 
 @dataclass(eq=False)

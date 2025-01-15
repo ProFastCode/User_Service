@@ -1,6 +1,6 @@
-from infrastructure.mediator import Mediator
-from application.user.commands import CreateUser
-from application.user.interfaces import UserReader
+from src.infrastructure.mediator import Mediator
+from src.application.user.commands import CreateUser
+from src.application.user.interfaces import UserReader
 
 
 async def test_user_create(
