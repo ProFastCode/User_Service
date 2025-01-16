@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from src.domain.common import DomainError
+from src.domain.common import ValueObjectError
 
 
 @dataclass(eq=False)
-class UsernameTooShortError(DomainError):
+class UsernameTooShortError(ValueObjectError):
     username: str
 
     @property
@@ -13,7 +13,7 @@ class UsernameTooShortError(DomainError):
 
 
 @dataclass(eq=False)
-class UsernameTooLongError(DomainError):
+class UsernameTooLongError(ValueObjectError):
     username: str
 
     @property
@@ -22,7 +22,7 @@ class UsernameTooLongError(DomainError):
 
 
 @dataclass(eq=False)
-class WrongUsernameFormatError(DomainError):
+class WrongUsernameFormatError(ValueObjectError):
     username: str
 
     @property

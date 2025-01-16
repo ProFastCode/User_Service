@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 
-from src.domain.common import DomainError
+from src.domain.common import ValueObjectError
 
 
 @dataclass(eq=False)
-class TokenInvalidError(DomainError):
+class TokenInvalidError(ValueObjectError):
     token: str
+    payload: dict
 
     @property
     def message(self) -> str:
@@ -13,8 +14,9 @@ class TokenInvalidError(DomainError):
 
 
 @dataclass(eq=False)
-class TokenExpiredError(DomainError):
+class TokenExpiredError(ValueObjectError):
     token: str
+    payload: dict
 
     @property
     def message(self) -> str:

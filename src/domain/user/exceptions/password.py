@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from src.domain.common import DomainError
+from src.domain.common import ValueObjectError
 
 
 @dataclass(eq=False)
-class PasswordTooShortError(DomainError):
+class PasswordTooShortError(ValueObjectError):
     password: str
 
     @property
@@ -13,7 +13,7 @@ class PasswordTooShortError(DomainError):
 
 
 @dataclass(eq=False)
-class PasswordTooLongError(DomainError):
+class PasswordTooLongError(ValueObjectError):
     password: str
 
     @property
@@ -22,7 +22,7 @@ class PasswordTooLongError(DomainError):
 
 
 @dataclass(eq=False)
-class PasswordRequiresDigitError(DomainError):
+class PasswordRequiresDigitError(ValueObjectError):
     password: str
 
     @property
@@ -31,7 +31,7 @@ class PasswordRequiresDigitError(DomainError):
 
 
 @dataclass(eq=False)
-class PasswordRequiresUppercaseError(DomainError):
+class PasswordRequiresUppercaseError(ValueObjectError):
     password: str
 
     @property
@@ -40,7 +40,7 @@ class PasswordRequiresUppercaseError(DomainError):
 
 
 @dataclass(eq=False)
-class PasswordRequiresLowercaseError(DomainError):
+class PasswordRequiresLowercaseError(ValueObjectError):
     password: str
 
     @property
@@ -49,7 +49,7 @@ class PasswordRequiresLowercaseError(DomainError):
 
 
 @dataclass(eq=False)
-class PasswordRequiresSpecialCharError(DomainError):
+class PasswordRequiresSpecialCharError(ValueObjectError):
     password: str
 
     @property
@@ -58,7 +58,7 @@ class PasswordRequiresSpecialCharError(DomainError):
 
 
 @dataclass(eq=False)
-class WrongPasswordFormatError(DomainError):
+class WrongPasswordFormatError(ValueObjectError):
     password: str
 
     @property

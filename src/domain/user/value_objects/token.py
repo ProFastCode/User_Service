@@ -1,11 +1,12 @@
 from typing import Self
 from dataclasses import dataclass, field
 from time import time
+from uuid import UUID
 
 import jwt
 
 from src.domain.common import ValueObject
-from src.domain.auth.exceptions.token import TokenInvalidError, TokenExpiredError
+from src.domain.user.exceptions.token import TokenInvalidError, TokenExpiredError
 
 
 @dataclass(frozen=True)
@@ -24,7 +25,7 @@ class Token(ValueObject[str]):
     jwt_secret: str
 
     @classmethod
-    def create(cls, user_id: int, expiration_time: int, jwt_secret: str) -> Self:
+    def create(cls, user_oid: UUID, expiration_time: int, jwt_secret: str) -> Self:
         """
         Создает новый токен с указанным временем истечения.
 
@@ -33,7 +34,7 @@ class Token(ValueObject[str]):
         :return: Экземпляр класса Token.
         """
         payload = {
-            "user_id": user_id,
+            "user_oid": str(user_oid),
             "exp": int(time()) + expiration_time,
         }
         value = jwt.encode(payload, jwt_secret, algorithm="HS256")
@@ -49,13 +50,14 @@ class Token(ValueObject[str]):
             payload = jwt.decode(self.value, self.jwt_secret, algorithms=["HS256"])
             object.__setattr__(self, "payload", payload)
         except jwt.ExpiredSignatureError:
-            raise TokenExpiredError(self.value)
+            raise TokenExpiredError(self.value, self.payload)
         except jwt.InvalidTokenError:
-            raise TokenInvalidError(self.value)
+            raise TokenInvalidError(self.value, self.payload)
 
-        if not self.payload.get("exp") or not self.payload.get("user_id"):
-            raise TokenInvalidError(self.value)
+        if not self.payload.get("exp") or not self.payload.get("user_oid"):
+            raise TokenInvalidError(self.value, self.payload)
 
+    @property
     def is_valid(self) -> bool:
         """
         Проверяет валидность токена.
@@ -64,3 +66,10 @@ class Token(ValueObject[str]):
         """
         self._validate()
         return True
+
+    @property
+    def user_oid(self) -> UUID:
+        if user_oid := self.payload.get("user_oid"):
+            return UUID(user_oid)
+
+        raise TokenInvalidError(self.value, self.payload)

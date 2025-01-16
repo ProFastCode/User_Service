@@ -7,3 +7,6 @@ from src.application.user import dto
 class UserReader(Protocol):
     async def get_by_oid(self, user_oid: UUID) -> dto.UserDTO:
         raise NotImplementedError
+
+    async def get_by_username(self, username: str) -> dto.UserDTO:
+        raise NotImplementedError

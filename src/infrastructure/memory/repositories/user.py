@@ -26,6 +26,21 @@ class UserReaderMemory(MemoryRepo, UserReader):
     async def get_by_oid(self, user_oid: UUID) -> dto.UserDTO:
         for user in self._storage:
             if user.oid == user_oid:
-                return dto.UserDTO(username=user.username.to_raw())
+                return dto.UserDTO(
+                    oid=user.oid,
+                    username=user.username.to_raw(),
+                    password=user.password.to_raw(),
+                )
+
+        raise ValueError(user_oid)
+
+    async def get_by_username(self, username: str) -> dto.UserDTO:
+        for user in self._storage:
+            if user.username.to_raw() == username:
+                return dto.UserDTO(
+                    oid=user.oid,
+                    username=user.username.to_raw(),
+                    password=user.password.to_raw(),
+                )
 
         raise KeyError()
