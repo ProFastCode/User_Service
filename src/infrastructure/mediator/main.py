@@ -6,8 +6,7 @@ from src.application.user.queries import GetUserByOid, GetUserByOidHandler
 
 
 def init_mediator() -> Mediator:
-    mediator = Mediator()
-    return mediator
+    return Mediator()
 
 
 async def setup_mediator(mediator: Mediator, container: AsyncContainer) -> None:

@@ -7,15 +7,23 @@ from src.application.user.interfaces import UserReader, UserRepo
 from src.infrastructure.mediator import Mediator
 from src.infrastructure.mediator.main import setup_mediator
 from src.infrastructure.memory.repositories import UserReaderMemory, UserRepoMemory
+from src.tests.config import TestConfig
 from src.tests.ioc import TestAppProvider
 
 
 @pytest.fixture(scope="session")
 async def ioc() -> AsyncIterator[AsyncContainer]:
-    container = make_async_container(TestAppProvider())
+    container = make_async_container(
+        TestAppProvider(), context={"config": TestConfig()}
+    )
     async with container() as container:
         yield container
         await container.close()
+
+
+@pytest.fixture(scope="session")
+async def config(ioc: AsyncContainer) -> TestConfig:
+    return await ioc.get("config")
 
 
 @pytest.fixture(scope="session")

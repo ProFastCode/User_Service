@@ -10,7 +10,7 @@ class AccessToken(Entity):
     token: Token
 
     @classmethod
-    def create(cls, user_id: int) -> Self:
+    def create(cls, user_id: int, jwt_secret: str) -> Self:
         """
         Создает новый AccessToken для указанного пользователя.
 
@@ -18,5 +18,7 @@ class AccessToken(Entity):
         :return: Объект AccessToken.
         """
         return cls(
-            token=Token.create(user_id, expiration_time=60 * 10),
+            token=Token.create(
+                user_id=user_id, expiration_time=60 * 10, jwt_secret=jwt_secret
+            ),
         )
