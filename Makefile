@@ -9,7 +9,7 @@ API_CONTAINER = api
 api:
 	${DC} -f ${API_FILE} ${ENV} up --build -d
 
-.PHONY: app-down
+.PHONY: api-down
 api-down:
 	${DC} -f ${API_FILE} down
 

@@ -5,19 +5,17 @@ from src.domain.common import ValueObjectError
 
 @dataclass(eq=False)
 class TokenInvalidError(ValueObjectError):
-    token: str
-    payload: dict
+    status = 401
 
     @property
     def message(self) -> str:
-        return f"Token invalid {self.token}"
+        return "The provided token is invalid or malformed."
 
 
 @dataclass(eq=False)
 class TokenExpiredError(ValueObjectError):
-    token: str
-    payload: dict
+    status = 401
 
     @property
     def message(self) -> str:
-        return f"Token expired {self.token}"
+        return "The provided token has expired and is no longer valid."

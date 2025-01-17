@@ -5,6 +5,7 @@ from src.domain.common import ValueObjectError
 
 @dataclass(eq=False)
 class UsernameTooShortError(ValueObjectError):
+    status = 422
     username: str
 
     @property
@@ -14,6 +15,7 @@ class UsernameTooShortError(ValueObjectError):
 
 @dataclass(eq=False)
 class UsernameTooLongError(ValueObjectError):
+    status = 422
     username: str
 
     @property
@@ -23,6 +25,7 @@ class UsernameTooLongError(ValueObjectError):
 
 @dataclass(eq=False)
 class WrongUsernameFormatError(ValueObjectError):
+    status = 422
     username: str
 
     @property

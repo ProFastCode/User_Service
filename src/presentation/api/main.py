@@ -1,49 +1,21 @@
 import logging
-from litestar import Litestar, Request, Response
-from litestar.enums import ScopeType
+from litestar import Litestar
 from litestar.openapi.config import OpenAPIConfig
 from litestar.openapi.plugins import SwaggerRenderPlugin
 
 from dishka import make_async_container
 from dishka.integrations import litestar as litestar_integration
-from litestar.types import ASGIApp, Scope, Receive, Send
 
 from src.infrastructure.ioc import AppProvider
-from src.infrastructure.mediator import Mediator
-from src.infrastructure.mediator.main import setup_mediator
 from src.domain.common.exception import AppError
+from src.presentation.api.exception_handlers import app_error_handler
+from src.presentation.api.middleware import add_request_container_middleware
 
 from .user import user_router
 
 logger = logging.getLogger(__name__)
 
 ioc = make_async_container(AppProvider())
-
-
-def app_error_handler(request: Request, exc: AppError) -> Response:
-    logging.error(exc.message)
-    return Response(
-        content={"message": exc.message},
-        status_code=400,
-    )
-
-
-def add_request_container_middleware(app: ASGIApp) -> ASGIApp:
-    async def middleware(scope: Scope, receive: Receive, send: Send) -> None:
-        if scope.get("type") != ScopeType.HTTP:
-            await app(scope, receive, send)
-            return
-
-        request = Request(scope)  # type: ignore[var-annotated]
-        async with request.app.state.dishka_container(
-            {Request: request},
-        ) as request_container:
-            mediator = await request_container.get(Mediator)
-            await setup_mediator(mediator=mediator, container=request_container)
-            request.state.dishka_container = request_container
-            await app(scope, receive, send)
-
-    return middleware
 
 
 def get_litestar_app() -> Litestar:

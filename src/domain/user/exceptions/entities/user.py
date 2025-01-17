@@ -5,6 +5,8 @@ from src.domain.common import DomainError
 
 @dataclass(eq=False)
 class InvalidUsernameOrPasswordError(DomainError):
+    status = 401
+
     username: str
     password: str
 

@@ -53,12 +53,12 @@ class Token(ValueObject[str]):
             payload = jwt.decode(self.value, self.jwt_secret, algorithms=["HS256"])
             object.__setattr__(self, "payload", payload)
         except jwt.ExpiredSignatureError:
-            raise TokenExpiredError(self.value, self.payload)
+            raise TokenExpiredError()
         except jwt.InvalidTokenError:
-            raise TokenInvalidError(self.value, self.payload)
+            raise TokenInvalidError()
 
         if not self.payload.get("exp") or not self.payload.get("user_oid"):
-            raise TokenInvalidError(self.value, self.payload)
+            raise TokenInvalidError()
 
     @property
     def is_valid(self) -> bool:
