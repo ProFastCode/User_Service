@@ -1,5 +1,7 @@
 from dishka import Provider, Scope, provide
 
+from src.application.token.commands.create_token_pair import CreateTokenPairHandler
+from src.application.token.queries.get_oid_token import GetOidTokenHandler
 from src.config import Config
 from src.infrastructure.uow import UnitOfWork
 from src.infrastructure.mediator import Mediator
@@ -13,7 +15,6 @@ from src.application.user.interfaces import UserRepo, UserReader
 from src.application.user.commands import RegistrationUserHandler, LoginUserHandler
 from src.application.user.queries import (
     GetUserByOidHandler,
-    GetUserByTokenHandler,
     GetUserByUsernameHandler,
 )
 
@@ -27,14 +28,15 @@ class TestAppProvider(Provider):
     registration_user_command_handler = provide(
         RegistrationUserHandler, scope=Scope.REQUEST
     )
-
     get_user_by_oid_query_handler = provide(GetUserByOidHandler, scope=Scope.REQUEST)
-    get_user_by_token_query_handler = provide(
-        GetUserByTokenHandler, scope=Scope.REQUEST
-    )
     get_user_by_username_query_handler = provide(
         GetUserByUsernameHandler, scope=Scope.REQUEST
     )
+
+    create_token_pair_command_handler = provide(
+        CreateTokenPairHandler, scope=Scope.REQUEST
+    )
+    get_oid_token_query_handler = provide(GetOidTokenHandler, scope=Scope.REQUEST)
 
     @provide(scope=Scope.REQUEST)
     def uow(self) -> UnitOfWork:

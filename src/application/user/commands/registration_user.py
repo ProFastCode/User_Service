@@ -1,25 +1,25 @@
 import logging
 from dataclasses import dataclass
 
-from src.application.user.dto import AuthUserDTO
 from src.config import Config
-from src.domain.user.value_objects import Token
 from src.infrastructure.mediator import Mediator
 from src.application.common.command import Command, CommandHandler
 from src.application.common.interfaces.uow import UnitOfWork
 from src.application.user.interfaces import UserRepo
 from src.domain.user.entities.user import User
+from src.application.token.commands import CreateTokenPair
+from src.application.token.dto import TokenPairDTO
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
-class RegistrationUser(Command[AuthUserDTO]):
+class RegistrationUser(Command[TokenPairDTO]):
     username: str
     password: str
 
 
-class RegistrationUserHandler(CommandHandler[RegistrationUser, AuthUserDTO]):
+class RegistrationUserHandler(CommandHandler[RegistrationUser, TokenPairDTO]):
     def __init__(
         self,
         config: Config,
@@ -32,21 +32,15 @@ class RegistrationUserHandler(CommandHandler[RegistrationUser, AuthUserDTO]):
         self._uow = uow
         self._mediator = mediator
 
-    async def __call__(self, command: RegistrationUser) -> AuthUserDTO:
+    async def __call__(self, command: RegistrationUser) -> TokenPairDTO:
         user = User.create(command.username, command.password)
         await self._user_repo.create(user)
         events = user.pull_events()
         await self._mediator.publish(events)
         await self._uow.commit()
 
-        access_token = Token.create(user.oid, 60 * 10, self._config.JWT_SECRET)
-        refresh_token = Token.create(user.oid, 60 * 60 * 24, self._config.JWT_SECRET)
-
-        auth_user_dto = AuthUserDTO(
-            access_token=access_token.to_raw(),
-            refresh_token=refresh_token.to_raw(),
-        )
+        token_pair_dto = await self._mediator.send(CreateTokenPair(user.oid))
 
         logger.info("User registered", extra={"user": user})
 
-        return auth_user_dto
+        return token_pair_dto
