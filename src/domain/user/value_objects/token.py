@@ -6,7 +6,10 @@ from uuid import UUID
 import jwt
 
 from src.domain.common import ValueObject
-from src.domain.user.exceptions.token import TokenInvalidError, TokenExpiredError
+from src.domain.user.exceptions.value_objects.token import (
+    TokenInvalidError,
+    TokenExpiredError,
+)
 
 
 @dataclass(frozen=True)

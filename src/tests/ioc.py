@@ -10,7 +10,7 @@ from src.infrastructure.memory import MemorySession
 from src.infrastructure.memory.repositories import UserRepoMemory, UserReaderMemory
 
 from src.application.user.interfaces import UserRepo, UserReader
-from src.application.user.commands import CreateUserHandler, LoginUserHandler
+from src.application.user.commands import RegistrationUserHandler, LoginUserHandler
 from src.application.user.queries import (
     GetUserByOidHandler,
     GetUserByTokenHandler,
@@ -24,7 +24,9 @@ class TestAppProvider(Provider):
     memory_storage = provide(MemorySession, scope=Scope.APP)
 
     login_user_command_handler = provide(LoginUserHandler, scope=Scope.REQUEST)
-    create_user_command_handler = provide(CreateUserHandler, scope=Scope.REQUEST)
+    registration_user_command_handler = provide(
+        RegistrationUserHandler, scope=Scope.REQUEST
+    )
 
     get_user_by_oid_query_handler = provide(GetUserByOidHandler, scope=Scope.REQUEST)
     get_user_by_token_query_handler = provide(

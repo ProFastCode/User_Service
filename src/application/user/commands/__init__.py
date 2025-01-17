@@ -1,9 +1,9 @@
-from .create_user import CreateUser, CreateUserHandler
 from .login_user import LoginUser, LoginUserHandler
+from .registration_user import RegistrationUser, RegistrationUserHandler
 
 __all__ = (
-    "CreateUser",
-    "CreateUserHandler",
     "LoginUser",
     "LoginUserHandler",
+    "RegistrationUser",
+    "RegistrationUserHandler",
 )

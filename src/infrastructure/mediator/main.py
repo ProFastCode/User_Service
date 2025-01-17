@@ -3,10 +3,10 @@ from dishka.async_container import AsyncContainer
 
 from .mediator import Mediator
 from src.application.user.commands import (
-    CreateUser,
-    CreateUserHandler,
     LoginUser,
     LoginUserHandler,
+    RegistrationUser,
+    RegistrationUserHandler,
 )
 from src.application.user.queries import (
     GetUserByOid,
@@ -28,8 +28,8 @@ async def setup_mediator(mediator: Mediator, container: AsyncContainer) -> None:
         await container.get(LoginUserHandler),
     )
     mediator.register_command_handler(
-        CreateUser,
-        await container.get(CreateUserHandler),
+        RegistrationUser,
+        await container.get(RegistrationUserHandler),
     )
 
     mediator.register_query_handler(

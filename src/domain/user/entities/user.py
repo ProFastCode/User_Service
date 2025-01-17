@@ -3,6 +3,7 @@ from typing import Self
 
 from src.domain.common import AggregateRoot, UUIDEntity, CreatedAtEntity
 from src.domain.user.value_objects import Username, Password
+from src.domain.user.exceptions.entities.user import InvalidUsernameOrPasswordError
 
 
 @dataclass
@@ -30,11 +31,14 @@ class User(AggregateRoot, UUIDEntity, CreatedAtEntity):
             password=Password(password),
         )
 
-    def check_password(self, password: str) -> bool:
+    def check_password(self, password: str):
         """
         Проверяет, совпадает ли переданный пароль с текущим паролем пользователя.
         """
-        return self.password.to_raw() == password
+        if self.password.to_raw() != password:
+            raise InvalidUsernameOrPasswordError(
+                username=self.username.to_raw(), password=password
+            )
 
     def change_password(self, new_password: str) -> None:
         """

@@ -5,12 +5,6 @@ from src.application.common.dto import DTO
 
 
 @dataclass(frozen=True)
-class RequestCreateUserDTO(DTO):
-    username: str
-    password: str
-
-
-@dataclass(frozen=True)
 class ResponseUserDTO(DTO):
     oid: UUID
     username: str

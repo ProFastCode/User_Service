@@ -5,13 +5,13 @@ from src.application.common.dto import DTO
 
 
 @dataclass(frozen=True)
-class CreateUserDTO(DTO):
+class UserDTO(DTO):
+    oid: UUID
     username: str
     password: str
 
 
 @dataclass(frozen=True)
-class UserDTO(DTO):
-    oid: UUID
-    username: str
-    password: str
+class AuthUserDTO(DTO):
+    access_token: str
+    refresh_token: str

@@ -1,18 +1,23 @@
 from src.infrastructure.mediator import Mediator
-from src.application.user.commands import CreateUser, LoginUser
+from src.application.user.commands import RegistrationUser, LoginUser
 from src.application.user.queries import GetUserByToken, GetUserByUsername, GetUserByOid
 
 
-async def test_user_create(
+async def test_user_registration(
     mediator: Mediator,
 ):
-    user_oid = await mediator.send(CreateUser("qwerty", "Q1w@erty"))
+    auth_user_dto = await mediator.send(RegistrationUser("qwerty", "Q1w@erty"))
+    user = await mediator.query(GetUserByToken(auth_user_dto.access_token))
 
-    assert await mediator.query(GetUserByOid(user_oid))
-    assert await mediator.query(GetUserByUsername("qwerty"))
+    assert user
+    assert await mediator.query(GetUserByOid(user.oid))
+    assert await mediator.query(GetUserByUsername(user.username))
 
 
 async def test_user_login(mediator: Mediator):
-    login_user_dto = await mediator.send(LoginUser("qwerty", "Q1w@erty"))
+    auth_user_dto = await mediator.send(LoginUser("qwerty", "Q1w@erty"))
+    user = await mediator.query(GetUserByToken(auth_user_dto.access_token))
 
-    assert await mediator.query(GetUserByToken(login_user_dto.access_token))
+    assert user
+    assert await mediator.query(GetUserByOid(user.oid))
+    assert await mediator.query(GetUserByUsername(user.username))

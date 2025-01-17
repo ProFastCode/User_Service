@@ -1,5 +1,4 @@
-from .user import CreateUserDTO, UserDTO
-from .login_user import LoginUserDTO
+from .user import UserDTO, AuthUserDTO
 
 
-__all__ = ("CreateUserDTO", "UserDTO", "LoginUserDTO")
+__all__ = ("UserDTO", "AuthUserDTO")
