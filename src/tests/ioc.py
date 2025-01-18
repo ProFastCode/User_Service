@@ -1,7 +1,11 @@
 from dishka import Provider, Scope, provide
 
-from src.application.token.commands.create_token_pair import CreateTokenPairHandler
-from src.application.token.queries.get_oid_token import GetOidTokenHandler
+from src.application.token.commands import (
+    CreateTokenPairHandler,
+    CreateTokenHandler,
+    RefreshTokenHandler,
+)
+from src.application.token.queries import GetOidTokenHandler
 from src.config import Config
 from src.infrastructure.uow import UnitOfWork
 from src.infrastructure.mediator import Mediator
@@ -33,6 +37,8 @@ class TestAppProvider(Provider):
         GetUserByUsernameHandler, scope=Scope.REQUEST
     )
 
+    create_token_command_handler = provide(CreateTokenHandler, scope=Scope.REQUEST)
+    refresh_token_command_handler = provide(RefreshTokenHandler, scope=Scope.REQUEST)
     create_token_pair_command_handler = provide(
         CreateTokenPairHandler, scope=Scope.REQUEST
     )

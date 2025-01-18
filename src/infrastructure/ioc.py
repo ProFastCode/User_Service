@@ -13,7 +13,11 @@ from src.application.user.queries import (
     GetUserByOidHandler,
     GetUserByUsernameHandler,
 )
-from src.application.token.commands import CreateTokenPairHandler
+from src.application.token.commands import (
+    CreateTokenPairHandler,
+    CreateTokenHandler,
+    RefreshTokenHandler,
+)
 from src.application.token.queries import GetOidTokenHandler
 
 
@@ -31,6 +35,8 @@ class AppProvider(Provider):
         GetUserByUsernameHandler, scope=Scope.REQUEST
     )
 
+    create_token_command_handler = provide(CreateTokenHandler, scope=Scope.REQUEST)
+    refresh_token_command_handler = provide(RefreshTokenHandler, scope=Scope.REQUEST)
     create_token_pair_command_handler = provide(
         CreateTokenPairHandler, scope=Scope.REQUEST
     )

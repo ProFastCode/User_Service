@@ -1,15 +1,13 @@
 import logging
 from dataclasses import dataclass
 from uuid import UUID
-from time import time
-
-import jwt
 
 from src.config import Config
 from src.infrastructure.mediator import Mediator
 from src.application.token.dto import TokenPairDTO
 from src.application.common.command import Command, CommandHandler
 from src.application.token.constants import TokenType
+from src.application.token.commands import CreateToken
 
 logger = logging.getLogger(__name__)
 
@@ -29,20 +27,11 @@ class CreateTokenPairHandler(CommandHandler[CreateTokenPair, TokenPairDTO]):
         self._mediator = mediator
 
     async def __call__(self, command: CreateTokenPair) -> TokenPairDTO:
-        oid = str(command.oid)
-        current_time: float = time()
-
-        access_token = jwt.encode(
-            dict(oid=oid, exp=current_time + 60 * 10),
-            self._config.JWT_SECRET,
-            algorithm="HS256",
-            headers=dict(tt=TokenType.ACCESS),
+        access_token = await self._mediator.send(
+            CreateToken(command.oid, TokenType.ACCESS, 60 * 10)
         )
-        refresh_token = jwt.encode(
-            dict(oid=oid, exp=current_time + 60 * 60 * 24),
-            self._config.JWT_SECRET,
-            algorithm="HS256",
-            headers=dict(tt=TokenType.REFRESH),
+        refresh_token = await self._mediator.send(
+            CreateToken(command.oid, TokenType.REFRESH, 60 * 60 * 24)
         )
 
         token_pair_dto = TokenPairDTO(
@@ -52,7 +41,7 @@ class CreateTokenPairHandler(CommandHandler[CreateTokenPair, TokenPairDTO]):
 
         logger.info(
             "Token pair created",
-            extra={"access_token": access_token, "refresh_token": refresh_token},
+            extra={"token_pair": token_pair_dto},
         )
 
         return token_pair_dto

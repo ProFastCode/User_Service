@@ -14,7 +14,14 @@ from src.application.user.queries import (
     GetUserByUsername,
     GetUserByUsernameHandler,
 )
-from src.application.token.commands import CreateTokenPair, CreateTokenPairHandler
+from src.application.token.commands import (
+    CreateTokenPair,
+    CreateTokenPairHandler,
+    CreateToken,
+    CreateTokenHandler,
+    RefreshToken,
+    RefreshTokenHandler,
+)
 from src.application.token.queries import GetOidToken, GetOidTokenHandler
 
 
@@ -40,6 +47,14 @@ async def setup_mediator(mediator: Mediator, container: AsyncContainer) -> None:
         await container.get(GetUserByUsernameHandler),
     )
 
+    mediator.register_command_handler(
+        CreateToken,
+        await container.get(CreateTokenHandler),
+    )
+    mediator.register_command_handler(
+        RefreshToken,
+        await container.get(RefreshTokenHandler),
+    )
     mediator.register_command_handler(
         CreateTokenPair,
         await container.get(CreateTokenPairHandler),
