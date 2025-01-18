@@ -9,6 +9,7 @@ from src.config import Config
 from src.infrastructure.mediator import Mediator
 from src.application.token.dto import TokenPairDTO
 from src.application.common.command import Command, CommandHandler
+from src.application.token.constants import TokenType
 
 logger = logging.getLogger(__name__)
 
@@ -35,11 +36,13 @@ class CreateTokenPairHandler(CommandHandler[CreateTokenPair, TokenPairDTO]):
             dict(oid=oid, exp=current_time + 60 * 10),
             self._config.JWT_SECRET,
             algorithm="HS256",
+            headers=dict(tt=TokenType.ACCESS),
         )
         refresh_token = jwt.encode(
             dict(oid=oid, exp=current_time + 60 * 60 * 24),
             self._config.JWT_SECRET,
             algorithm="HS256",
+            headers=dict(tt=TokenType.REFRESH),
         )
 
         token_pair_dto = TokenPairDTO(
