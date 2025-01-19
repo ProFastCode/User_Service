@@ -1,17 +1,13 @@
 import logging
 from dataclasses import dataclass
-from uuid import UUID
-from time import time
 
-import jwt
-
+from src.application.common.command import Command, CommandHandler
 from src.application.token.commands.create_token import CreateToken
+from src.application.token.constants import TokenType
+from src.application.token.dto import TokenDTO
 from src.application.token.queries.get_oid_token import GetOidToken
 from src.config import Config
 from src.infrastructure.mediator import Mediator
-from src.application.common.command import Command, CommandHandler
-from src.application.token.constants import TokenType
-from src.application.token.dto import TokenDTO
 
 logger = logging.getLogger(__name__)
 
