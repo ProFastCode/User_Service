@@ -1,6 +1,6 @@
 from litestar import Request
 from litestar.enums import ScopeType
-from litestar.types import ASGIApp, Scope, Receive, Send
+from litestar.types import ASGIApp, Receive, Scope, Send
 
 from src.infrastructure.mediator import Mediator
 from src.infrastructure.mediator.main import setup_mediator

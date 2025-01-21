@@ -1,13 +1,9 @@
 import pytest
 
 from src.domain.user.exceptions.value_objects.password import (
-    PasswordRequiresDigitError,
-    PasswordRequiresLowercaseError,
-    PasswordRequiresSpecialCharError,
-    PasswordRequiresUppercaseError,
-    PasswordTooLongError,
-    PasswordTooShortError,
-)
+    PasswordRequiresDigitError, PasswordRequiresLowercaseError,
+    PasswordRequiresSpecialCharError, PasswordRequiresUppercaseError,
+    PasswordTooLongError, PasswordTooShortError)
 from src.domain.user.value_objects.password import Password
 
 

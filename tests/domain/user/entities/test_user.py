@@ -1,7 +1,8 @@
 import pytest
 
 from src.domain.user.entities.user import User
-from src.domain.user.exceptions.entities.user import InvalidUsernameOrPasswordError
+from src.domain.user.exceptions.entities.user import \
+    InvalidUsernameOrPasswordError
 
 
 def test_create():

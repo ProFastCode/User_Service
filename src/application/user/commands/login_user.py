@@ -1,13 +1,13 @@
 import logging
 from dataclasses import dataclass
 
-from src.application.token.commands.create_token_pair import CreateTokenPair
-from src.config import Config
-from src.infrastructure.mediator import Mediator
-from src.application.user.queries import GetUserByUsername
 from src.application.common.command import Command, CommandHandler
-from src.domain.user.entities import User
+from src.application.token.commands.create_token_pair import CreateTokenPair
 from src.application.token.dto import TokenPairDTO
+from src.application.user.queries import GetUserByUsername
+from src.config import Config
+from src.domain.user.entities import User
+from src.infrastructure.mediator import Mediator
 
 logger = logging.getLogger(__name__)
 

@@ -3,8 +3,8 @@ from dataclasses import dataclass
 from uuid import UUID
 
 from src.application.common.query import Query, QueryHandler
-from src.application.user.interfaces import UserReader
 from src.application.user import dto
+from src.application.user.interfaces import UserReader
 
 logger = logging.getLogger(__name__)
 

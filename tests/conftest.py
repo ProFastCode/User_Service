@@ -6,7 +6,7 @@ from dishka.async_container import AsyncContainer, make_async_container
 from src.config import Config
 from src.infrastructure.mediator import Mediator
 from src.infrastructure.mediator.main import setup_mediator
-from src.tests.ioc import TestAppProvider
+from tests.ioc import TestAppProvider
 
 
 @pytest.fixture(scope="session")

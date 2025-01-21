@@ -1,10 +1,7 @@
 import pytest
 
 from src.domain.user.exceptions.value_objects.username import (
-    UsernameTooLongError,
-    UsernameTooShortError,
-    WrongUsernameFormatError,
-)
+    UsernameTooLongError, UsernameTooShortError, WrongUsernameFormatError)
 from src.domain.user.value_objects.username import Username
 
 

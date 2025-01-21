@@ -3,14 +3,9 @@ from dataclasses import dataclass
 
 from src.domain.common import ValueObject
 from src.domain.user.exceptions.value_objects.password import (
-    PasswordTooShortError,
-    PasswordTooLongError,
-    PasswordRequiresDigitError,
-    PasswordRequiresUppercaseError,
-    PasswordRequiresLowercaseError,
-    PasswordRequiresSpecialCharError,
-    WrongPasswordFormatError,
-)
+    PasswordRequiresDigitError, PasswordRequiresLowercaseError,
+    PasswordRequiresSpecialCharError, PasswordRequiresUppercaseError,
+    PasswordTooLongError, PasswordTooShortError, WrongPasswordFormatError)
 
 MIN_PASSWORD_LENGTH = 8
 MAX_PASSWORD_LENGTH = 64

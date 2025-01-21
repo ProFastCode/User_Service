@@ -1,14 +1,15 @@
 from typing import Annotated
 
+from dishka.integrations.litestar import FromDishka, inject
+from litestar import Router, get, post
 from litestar.params import Body
-from litestar import post, get, Router
-from dishka.integrations.litestar import inject, FromDishka
 
 from src.application.token.dto import TokenPairDTO
-from src.application.user.commands import RegistrationUser, LoginUser
 from src.application.token.queries import GetOidToken
+from src.application.user.commands import LoginUser, RegistrationUser
 from src.application.user.queries.get_user_by_oid import GetUserByOid
 from src.infrastructure.mediator import Mediator
+
 from .schemas import ResponseUserDTO
 
 

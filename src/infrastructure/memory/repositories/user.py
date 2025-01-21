@@ -1,10 +1,10 @@
 from uuid import UUID
 
-from .base import MemoryRepo
-
-from src.application.user.interfaces import UserRepo, UserReader
 from src.application.user import dto
+from src.application.user.interfaces import UserReader, UserRepo
 from src.domain.user.entities.user import User
+
+from .base import MemoryRepo
 
 
 class UserRepoMemory(MemoryRepo, UserRepo):

@@ -1,14 +1,14 @@
 import logging
 from dataclasses import dataclass
 
-from src.config import Config
-from src.infrastructure.mediator import Mediator
 from src.application.common.command import Command, CommandHandler
 from src.application.common.interfaces.uow import UnitOfWork
-from src.application.user.interfaces import UserRepo
-from src.domain.user.entities.user import User
 from src.application.token.commands import CreateTokenPair
 from src.application.token.dto import TokenPairDTO
+from src.application.user.interfaces import UserRepo
+from src.config import Config
+from src.domain.user.entities.user import User
+from src.infrastructure.mediator import Mediator
 
 logger = logging.getLogger(__name__)
 

@@ -3,11 +3,7 @@ from dataclasses import dataclass
 
 from src.domain.common import ValueObject
 from src.domain.user.exceptions.value_objects.username import (
-    UsernameTooShortError,
-    UsernameTooLongError,
-    WrongUsernameFormatError,
-)
-
+    UsernameTooLongError, UsernameTooShortError, WrongUsernameFormatError)
 
 MIN_USERNAME_LENGTH = 4
 MAX_USERNAME_LENGTH = 32

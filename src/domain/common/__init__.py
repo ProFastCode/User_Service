@@ -1,9 +1,9 @@
 from .aggregate_root import AggregateRoot
-from .entity import Entity, UUIDEntity, CreatedAtEntity
+from .constants import Empty
+from .entity import CreatedAtEntity, Entity, UUIDEntity
 from .event import Event
 from .exception import AppError, DomainError, ValueObjectError
 from .value_object import ValueObject
-from .constants import Empty
 
 __all__ = (
     "AggregateRoot",

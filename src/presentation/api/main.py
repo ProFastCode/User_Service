@@ -1,13 +1,13 @@
 import logging
+
+from dishka import make_async_container
+from dishka.integrations import litestar as litestar_integration
 from litestar import Litestar
 from litestar.openapi.config import OpenAPIConfig
 from litestar.openapi.plugins import SwaggerRenderPlugin
 
-from dishka import make_async_container
-from dishka.integrations import litestar as litestar_integration
-
-from src.infrastructure.ioc import AppProvider
 from src.domain.common.exception import AppError
+from src.infrastructure.ioc import AppProvider
 from src.presentation.api.exception_handlers import app_error_handler
 from src.presentation.api.middleware import add_request_container_middleware
 

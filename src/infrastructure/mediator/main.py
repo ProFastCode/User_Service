@@ -1,28 +1,18 @@
 from dishka.async_container import AsyncContainer
 
+from src.application.token.commands import (CreateToken, CreateTokenHandler,
+                                            CreateTokenPair,
+                                            CreateTokenPairHandler,
+                                            RefreshToken, RefreshTokenHandler)
+from src.application.token.queries import GetOidToken, GetOidTokenHandler
+from src.application.user.commands import (LoginUser, LoginUserHandler,
+                                           RegistrationUser,
+                                           RegistrationUserHandler)
+from src.application.user.queries import (GetUserByOid, GetUserByOidHandler,
+                                          GetUserByUsername,
+                                          GetUserByUsernameHandler)
 
 from .mediator import Mediator
-from src.application.user.commands import (
-    LoginUser,
-    LoginUserHandler,
-    RegistrationUser,
-    RegistrationUserHandler,
-)
-from src.application.user.queries import (
-    GetUserByOid,
-    GetUserByOidHandler,
-    GetUserByUsername,
-    GetUserByUsernameHandler,
-)
-from src.application.token.commands import (
-    CreateTokenPair,
-    CreateTokenPairHandler,
-    CreateToken,
-    CreateTokenHandler,
-    RefreshToken,
-    RefreshTokenHandler,
-)
-from src.application.token.queries import GetOidToken, GetOidTokenHandler
 
 
 def init_mediator() -> Mediator:

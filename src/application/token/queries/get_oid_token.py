@@ -4,11 +4,12 @@ from uuid import UUID
 
 import jwt
 
+from src.application.common.query import Query, QueryHandler
+from src.application.token.constants import TokenType
+from src.application.token.exceptions.token import (TokenExpiredError,
+                                                    TokenInvalidError)
 from src.config import Config
 from src.infrastructure.mediator import Mediator
-from src.application.common.query import Query, QueryHandler
-from src.application.token.exceptions.token import TokenExpiredError, TokenInvalidError
-from src.application.token.constants import TokenType
 
 logger = logging.getLogger(__name__)
 

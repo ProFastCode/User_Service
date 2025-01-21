@@ -1,4 +1,5 @@
 import logging
+
 from litestar import Request, Response
 
 from src.domain.common.exception import AppError

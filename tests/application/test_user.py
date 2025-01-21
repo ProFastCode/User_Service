@@ -1,9 +1,9 @@
 from src.application.token.commands.refresh_token import RefreshToken
-from src.infrastructure.mediator import Mediator
-from src.application.user.commands import RegistrationUser, LoginUser
-from src.application.user.queries import GetUserByUsername, GetUserByOid
-from src.application.token.queries import GetOidToken
 from src.application.token.constants import TokenType
+from src.application.token.queries import GetOidToken
+from src.application.user.commands import LoginUser, RegistrationUser
+from src.application.user.queries import GetUserByOid, GetUserByUsername
+from src.infrastructure.mediator import Mediator
 
 
 async def test_user_registration(

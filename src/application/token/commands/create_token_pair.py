@@ -2,12 +2,12 @@ import logging
 from dataclasses import dataclass
 from uuid import UUID
 
+from src.application.common.command import Command, CommandHandler
+from src.application.token.commands import CreateToken
+from src.application.token.constants import TokenType
+from src.application.token.dto import TokenPairDTO
 from src.config import Config
 from src.infrastructure.mediator import Mediator
-from src.application.token.dto import TokenPairDTO
-from src.application.common.command import Command, CommandHandler
-from src.application.token.constants import TokenType
-from src.application.token.commands import CreateToken
 
 logger = logging.getLogger(__name__)
 
