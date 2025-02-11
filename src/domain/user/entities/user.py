@@ -2,8 +2,7 @@ from dataclasses import dataclass
 from typing import Self
 
 from src.domain.common import AggregateRoot, CreatedAtEntity, UUIDEntity
-from src.domain.user.exceptions.entities.user import \
-    InvalidUsernameOrPasswordError
+from src.domain.user.exceptions.entities.user import InvalidUsernameOrPasswordError
 from src.domain.user.value_objects import Password, Username
 
 

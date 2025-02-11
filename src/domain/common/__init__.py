@@ -2,7 +2,7 @@ from .aggregate_root import AggregateRoot
 from .constants import Empty
 from .entity import CreatedAtEntity, Entity, UUIDEntity
 from .event import Event
-from .exception import AppError, DomainError, ValueObjectError
+from .exceptions import AppError, DomainError, ValueObjectError
 from .value_object import ValueObject
 
 __all__ = (
