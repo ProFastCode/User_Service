@@ -7,7 +7,7 @@ from src.application.token.commands import CreateTokenPair
 from src.application.token.dto import TokenPairDTO
 from src.application.user.interfaces import UserRepo
 from src.config import Config
-from src.domain.user.entities.user import User
+from src.domain.user.entities.user import UserEntity
 from src.infrastructure.mediator import Mediator
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class RegistrationUserHandler(CommandHandler[RegistrationUser, TokenPairDTO]):
         self._mediator = mediator
 
     async def __call__(self, command: RegistrationUser) -> TokenPairDTO:
-        user = User.create(command.username, command.password)
+        user = UserEntity.create(command.username, command.password)
         await self._user_repo.create(user)
         events = user.pull_events()
         await self._mediator.publish(events)

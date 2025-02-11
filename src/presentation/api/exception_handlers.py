@@ -2,7 +2,7 @@ import logging
 
 from litestar import Request, Response
 
-from src.domain.common.exception import AppError
+from src.domain.common.exceptions import AppError
 
 
 def app_error_handler(request: Request, exc: AppError) -> Response:

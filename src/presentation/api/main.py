@@ -6,7 +6,7 @@ from litestar import Litestar
 from litestar.openapi.config import OpenAPIConfig
 from litestar.openapi.plugins import SwaggerRenderPlugin
 
-from src.domain.common.exception import AppError
+from src.domain.common.exceptions import AppError
 from src.infrastructure.ioc import AppProvider
 from src.presentation.api.exception_handlers import app_error_handler
 from src.presentation.api.middleware import add_request_container_middleware

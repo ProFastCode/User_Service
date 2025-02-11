@@ -6,7 +6,7 @@ from src.application.token.commands.create_token_pair import CreateTokenPair
 from src.application.token.dto import TokenPairDTO
 from src.application.user.queries import GetUserByUsername
 from src.config import Config
-from src.domain.user.entities import User
+from src.domain.user.entities import UserEntity
 from src.infrastructure.mediator import Mediator
 
 logger = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ class LoginUserHandler(CommandHandler[LoginUser, TokenPairDTO]):
 
     async def __call__(self, command: LoginUser) -> TokenPairDTO:
         user = await self._mediator.query(GetUserByUsername(command.username))
-        user_entity = User.create(username=user.username, password=user.password)
+        user_entity = UserEntity.create(username=user.username, password=user.password)
         user_entity.check_password(command.password)
 
         token_pair_dto = await self._mediator.send(CreateTokenPair(user.oid))

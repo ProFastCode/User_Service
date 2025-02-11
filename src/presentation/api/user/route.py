@@ -4,6 +4,7 @@ from dishka.integrations.litestar import FromDishka, inject
 from litestar import Router, get, post
 from litestar.params import Body
 
+from src.application.token.constants.token_type import TokenType
 from src.application.token.dto import TokenPairDTO
 from src.application.token.queries import GetOidToken
 from src.application.user.commands import LoginUser, RegistrationUser
@@ -32,7 +33,7 @@ async def login(
 @get(response_model=ResponseUserDTO)
 @inject
 async def read(access_token: str, mediator: FromDishka[Mediator]) -> ResponseUserDTO:
-    oid = await mediator.query(GetOidToken(access_token))
+    oid = await mediator.query(GetOidToken(access_token, TokenType.ACCESS))
     result = await mediator.query(GetUserByOid(oid))
     return ResponseUserDTO(
         oid=result.oid,

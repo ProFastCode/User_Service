@@ -2,15 +2,15 @@ from uuid import UUID
 
 from src.application.user import dto
 from src.application.user.interfaces import UserReader, UserRepo
-from src.domain.user.entities.user import User
+from src.domain.user.entities.user import UserEntity
 
 from .base import MemoryRepo
 
 
 class UserRepoMemory(MemoryRepo, UserRepo):
-    _storage: list[User]
+    _storage: list[UserEntity]
 
-    async def create(self, user: User) -> UUID:
+    async def create(self, user: UserEntity) -> UUID:
         self._storage.append(user)
         return user.oid
 
@@ -21,7 +21,7 @@ class UserRepoMemory(MemoryRepo, UserRepo):
 
 
 class UserReaderMemory(MemoryRepo, UserReader):
-    _storage: list[User]
+    _storage: list[UserEntity]
 
     async def get_by_oid(self, user_oid: UUID) -> dto.UserDTO:
         for user in self._storage:

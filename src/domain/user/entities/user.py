@@ -7,7 +7,7 @@ from src.domain.user.value_objects import Password, Username
 
 
 @dataclass
-class User(AggregateRoot, UUIDEntity, CreatedAtEntity):
+class UserEntity(AggregateRoot, UUIDEntity, CreatedAtEntity):
     """
     Сущность пользователя.
 
